@@ -87,7 +87,7 @@ def Dashboard():
 def Home():
     return render_template('Welcome.html')
 
-
+# =========================================
 @app.route('/Connection')
 def Connection():
     if SYSTEM['CONNECTED']:
@@ -95,7 +95,7 @@ def Connection():
     else:
         return render_template('Connection.html')
 
-
+# =========================================
 @app.route('/Demo')
 def Demo():
     return 'Demo'

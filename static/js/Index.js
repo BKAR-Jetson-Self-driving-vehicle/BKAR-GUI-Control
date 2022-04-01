@@ -99,7 +99,7 @@ async function getLightData(){
 getLightData();
 
 // Main Frame Navigation Buttons
-document.getElementById("HomeButton").onclick = function HomeButtonClicked(){
+document.getElementById("StreamButton").onclick = function StreamButtonClicked(){
     document.getElementById("ScreenFrame").src = "/Stream";
 }
 
