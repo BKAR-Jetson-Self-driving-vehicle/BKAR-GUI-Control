@@ -10,3 +10,5 @@
 ## Điều khiển với tay cầm gamepad
 
 ## Cài đặt một số chức năng
+
+## Thông tin
