@@ -91,7 +91,7 @@ def Home():
 @app.route('/Connection')
 def Connection():
     if SYSTEM['CONNECTED']:
-        return redirect(url_for('/Stream'))
+        return redirect(url_for('Stream'))
     else:
         return render_template('Connection.html')
 
@@ -103,13 +103,14 @@ def Demo():
 # =========================================
 @app.route('/Stream')
 def Stream():
-    """Video streaming home page."""
-    return render_template('stream.html')
+    if SYSTEM['CONNECTED']:
+        return render_template('stream.html')
+    else:
+        return redirect(url_for('Connection'))
 
 def gen():
     """Video streaming generator function."""
-    # vc = cv2.VideoCapture(0)
-    vc = cv2.VideoCapture('/mnt/sdb1/Videos/video ky yeu 12A4.mp4')
+    vc = cv2.VideoCapture(0)
     while True:
         read_return_code, frame = vc.read()
         encode_return_code, image_buffer = cv2.imencode('.jpg', frame)
@@ -235,5 +236,5 @@ if __name__ == '__main__':
     with open('KEY.json', 'r') as f:
         KEY = json.load(f)
 
-    app.run(debug=False)
-    app.run(host='0.0.0.0')
+    app.run(debug=True)
+    app.run(host='192.168.53.102')

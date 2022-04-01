@@ -32,7 +32,7 @@ function showTime(){
 showTime();
 
 // System Information
-const api_system_url = 'http://192.168.53.111:5000/System';
+const api_system_url = '/System';
 async function getSystemData(){
     try{
         const response = await fetch(api_system_url);
@@ -42,13 +42,16 @@ async function getSystemData(){
             document.getElementById("delay").innerText = String(Date.now() - data.TIMESTAMP) + " ms";
             document.getElementById("gear").innerText = data.GEAR;
             document.getElementById("voltage").innerText = data.VOLTAGE + " V";
-            document.getElementById("distance").innerText = data.DISTANCE + " Km";
+            document.getElementById("distance").innerText = data.DISTANCE + " Cm";
         }
         else{
             document.getElementById("ip-address").innerText = "Chưa kết nối";
             document.getElementById("delay").innerText = "-- ms";
-            document.getElementById("voltage").innerText = "0 V";
-            document.getElementById("distance").innerText = data.DISTANCE + " Km";
+            document.getElementById("voltage").innerText = "--- V";
+            document.getElementById("distance").innerText = "--- Cm";
+            // document.getElementById("Traffic-Sign").style.filter = invert();
+            // document.getElementById("Self-Driving-mode").style.filter = invert();
+            // document.getElementById("Remote-Control-mode").style.filter = invert();
         }
     }
     finally{
@@ -58,8 +61,8 @@ async function getSystemData(){
 getSystemData();
 
 // Footer status bar
-const api_motor_url = 'http://192.168.53.111:5000/Motor';
-const api_sensor_url = 'http://192.168.53.111:5000/Sensor';
+const api_motor_url = '/Motor';
+const api_sensor_url = '/Sensor';
 async function getFooterData(){
     try{
         const response_motor = await fetch(api_motor_url);
@@ -82,7 +85,7 @@ async function getFooterData(){
 getFooterData();
 
 // Light status
-const api_light_url = 'http://192.168.53.111:5000/Light';
+const api_light_url = '/Light';
 async function getLightData(){
     try{
         const response_light = await fetch(api_light_url);
@@ -100,7 +103,7 @@ getLightData();
 
 // Main Frame Navigation Buttons
 document.getElementById("StreamButton").onclick = function StreamButtonClicked(){
-    document.getElementById("ScreenFrame").src = "/Stream";
+    document.getElementById("ScreenFrame").src = "/Connection";
 }
 
 document.getElementById("ControllerButton").onclick = function ControllerButtonClicked(){
@@ -116,7 +119,7 @@ document.getElementById("InforButton").onclick = function InforButtonClicked(){
 }
 
 // Gamepad api
-const api_control_url = 'http://192.168.53.111:5000/Control';
+const api_control_url = '/Control';
 function createDictKey(myGamepad){
     var KEY = {'BUTTON':{}, 'AXIS':{}}
     for(i=0; i<myGamepad.axes.length; i++){
