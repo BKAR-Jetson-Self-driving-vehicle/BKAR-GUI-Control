@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename = 'css/Welcome.css')}}">
-    <title>Welcome to BKAR</title>
+  <meta charset="UTF-8">
+  <title>Welcome to BKAR</title>
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename = 'css/Welcome.css')}}">
+  <!-- <link rel="stylesheet" href="{{url_for('static', filename = 'css/reset.min.css')}}"> -->
+
 </head>
 <body>
-    <section class="showcase">
-        <div class="video-container">
-            <video src="https://traversymedia.com/downloads/video.mov" autoplay muted loop></video>
-        </div>
-        <div class="content">
-            <h1>Chào mừng đến với BKAR</h1>
-            <h3>Xe tự hành mini với NVIDIA Jetson Nano</h3>
-            <a href="/Connection" class="btn">Bắt đầu</a>
-        </div>
-    </section>
+<!-- partial:index.partial.html -->
+<div class="stage">
+  <div class="wrapper">
+    <div class="slash"></div>
+    <div class="sides">
+      <div class="side"></div>
+      <div class="side"></div>
+      <div class="side"></div>
+      <div class="side"></div>
+    </div>
+    <div class="text">
+      <div class="text--backing">BKAR</div>
+      <div class="text--left">
+        <div class="inner">BKAR</div>
+      </div>
+      <div class="text--right">
+        <div class="inner">BKAR</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  <script src="{{url_for('static', filename = 'js/Welcome.js')}}"></script>
 </body>
 </html>
