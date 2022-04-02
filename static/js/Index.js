@@ -55,7 +55,7 @@ async function getSystemData(){
         }
     }
     finally{
-        setTimeout(getSystemData, 50);
+        setTimeout(getSystemData, 500);
     }
 }
 getSystemData();
@@ -96,7 +96,7 @@ async function getLightData(){
         // document.getElementById('light-light').hidden = lights.RIGHT;
     }
     finally{
-        setTimeout(getLightData, 50);
+        setTimeout(getLightData, 500);
     }
 }
 getLightData();

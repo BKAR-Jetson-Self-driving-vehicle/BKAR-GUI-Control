@@ -1,9 +1,14 @@
+from __future__ import division
 import os
 import io
 import cv2
 import json
+import socket
+import struct
+import numpy as np
 from flask import Flask, redirect, request, url_for, render_template, Response
 from flask_restful import Resource, Api, reqparse, abort
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -108,16 +113,38 @@ def Stream():
     else:
         return redirect(url_for('Connection'))
 
+MAX_DGRAM = 2**16
+
+def dump_buffer(s):
+    """ Emptying buffer frame """
+    while True:
+        seg, addr = s.recvfrom(MAX_DGRAM)
+        print(seg[0])
+        if struct.unpack("B", seg[0:1])[0] == 1:
+            print("finish emptying buffer")
+            break
+
+
 def gen():
     """Video streaming generator function."""
-    vc = cv2.VideoCapture(0)
+    # Set up socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.bind(('192.168.53.102', 8000))
+    dat = b''
+    dump_buffer(s)
     while True:
-        read_return_code, frame = vc.read()
+        seg, addr = s.recvfrom(MAX_DGRAM)
+        if struct.unpack("B", seg[0:1])[0] > 1:
+            dat += seg[1:]
+        else:
+            dat += seg[1:]
+            frame = cv2.imdecode(np.fromstring(dat, dtype=np.uint8), 1)
         encode_return_code, image_buffer = cv2.imencode('.jpg', frame)
         io_buf = io.BytesIO(image_buffer)
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + io_buf.read() + b'\r\n')
-
+        dat = b''
+    s.close()
 
 @app.route('/video_stream')
 def video_stream():
@@ -174,14 +201,6 @@ class Control(Resource):
         return KEY
 
 
-class Stream(Resource):
-    def get(self):
-        return
-
-    def put(self):
-        return
-
-
 class Motor(Resource):
     def get(self):
         return MOTOR
@@ -220,7 +239,6 @@ class Light(Resource):
 
 api.add_resource(System, '/System')
 api.add_resource(Control, '/Control')
-# api.add_resource(Control, '/Stream')
 api.add_resource(Motor, '/Motor')
 api.add_resource(Sensor, '/Sensor')
 api.add_resource(Light, '/Light')
