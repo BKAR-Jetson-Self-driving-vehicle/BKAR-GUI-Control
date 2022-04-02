@@ -2,7 +2,7 @@
 <p align="center"><i>Web server system to interact and control BKAR.<br>Building from FrameWork Flask Python</i></p>
 
 # **Screenshot**
-<img src="https://github.com/BKAR-Jetson-Self-driving-vehicle/BKAR-GUI-Control/blob/main/static/images/home.gif">
+https://github.com/BKAR-Jetson-Self-driving-vehicle/BKAR-GUI-Control/blob/9b118d2b424bc4352f07d152467067d1fd18ce3f/static/images/home.mp4
 
 # **Main functions**
 ## Stream from cameras
