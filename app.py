@@ -40,11 +40,12 @@ SYSTEM_ARGS_PUT_API.add_argument('MODE',
                                  type=str,
                                  help='Current driving mode.')
 
+# =========================================
 SENSOR_ARGS_PUT_API = reqparse.RequestParser()
 SENSOR_ARGS_PUT_API.add_argument('X', type=float, help='X-axis.')
 SENSOR_ARGS_PUT_API.add_argument('Y', type=float, help='Y-axis.')
 SENSOR_ARGS_PUT_API.add_argument('Z', type=float, help='Z-axis.')
-
+# =========================================
 MOTOR_ARGS_PUT_API = reqparse.RequestParser()
 MOTOR_ARGS_PUT_API.add_argument('SPEED',
                                 type=int,
@@ -55,12 +56,13 @@ MOTOR_ARGS_PUT_API.add_argument('A_RATE',
 MOTOR_ARGS_PUT_API.add_argument('B_RATE',
                                 type=float,
                                 help='Rate speed of motor B.')
-
+# =========================================
 LIGHT_ARGS_PUT_API = reqparse.RequestParser()
 LIGHT_ARGS_PUT_API.add_argument('HEAD', type=bool, help='Head light status.')
 LIGHT_ARGS_PUT_API.add_argument('LEFT', type=bool, help='Left light status.')
 LIGHT_ARGS_PUT_API.add_argument('RIGHT', type=bool, help='Right light status.')
 
+# =========================================
 CONTROL_ARGS_PUT_API = reqparse.RequestParser()
 CONTROL_ARGS_PUT_API.add_argument('CONNECTED',
                                   type=bool,
@@ -129,7 +131,7 @@ def gen():
     """Video streaming generator function."""
     # Set up socket
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.bind(('192.168.53.102', 8000))
+    s.bind(('192.168.53.112', 8000))
     dat = b''
     dump_buffer(s)
     while True:
@@ -193,10 +195,10 @@ class Control(Resource):
     def put(self):
         args = CONTROL_ARGS_PUT_API.parse_args()
         if args['BUTTON'] is not None:
-            KEY["BUTTON"] = args['BUTTON']
+            KEY['BUTTON'] = args['BUTTON']
         if args['AXIS'] is not None:
-            KEY["AXIS"] = args['AXIS']
-        if args["CONNECTED"] is not None:
+            KEY['AXIS'] = args['AXIS']
+        if args['CONNECTED'] is not None:
             KEY['CONNECTED'] = args['CONNECTED']
         return KEY
 
@@ -254,5 +256,5 @@ if __name__ == '__main__':
     with open('KEY.json', 'r') as f:
         KEY = json.load(f)
 
-    app.run(debug=True)
+    app.run(debug=False)
     app.run(host='192.168.53.102')
