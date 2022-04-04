@@ -170,7 +170,7 @@ def configControl():
 # =========================================
 @app.route('/Logs')
 def Settings():
-    return 'Logs'
+    return render_template('Logs.html')
 
 
 # =========================================

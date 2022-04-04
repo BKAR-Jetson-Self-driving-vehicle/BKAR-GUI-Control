@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>BKAR - Logs</title>
+  <link rel="stylesheet" href="{{url_for('static', filename = 'css/Logs.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename = 'css/normalize.min.css')}}">
+  
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class=" terminal " id="logs">
+  <p class=" terminal--header ">BKAR - Logging starting...</p>
+  <p class=" terminal--input ">whoami</p>
+  <p class=" terminal--output ">Rafael Rinaldi</p>
+  <p class=" terminal--input ">find ~ -name secret-of-life</p>
+  <p class=" terminal--output ">42</p>
+  <p class=" terminal--input ">which planet</p>
+  <p class=" terminal--output ">/usr/milky-way/earth</p>
+  <p class=" terminal--input ">node</p>
+  <p class=" terminal--output is-console ">var sprintf = require('util').format;</p>
+  <p class=" terminal--output is-not-defined "></p>
+  <p class=" terminal--output is-console ">var msg = "CSS3 is %s!";</p>
+  <p class=" terminal--output is-not-defined "></p>
+  <p class=" terminal--output is-console ">console.log(sprintf(msg, 'awesome'));</p>
+  <p class="terminal--output">CSS3 is awesome!</p>
+  <p class=" terminal--output is-not-defined "></p>
+  <p class=" terminal--output is-console "></p>
+  <p class=" terminal--output ">(^C again to quit)</p>
+  <p class=" terminal--input "></p>
+</div>
+<!-- partial -->
+  
+</body>
+</html>
