@@ -3,6 +3,7 @@ import os
 import io
 import cv2
 import json
+import time
 import socket
 import struct
 import numpy as np
@@ -137,6 +138,8 @@ def gen():
     # dump_buffer(s)
     while True:
         ret, frame = cam.read()
+        if frame.shape[0] > 0:
+            SYSTEM['TIMESTAMP'] = int(time.time()*1000)
         # seg, addr = s.recvfrom(MAX_DGRAM)
         # if struct.unpack("B", seg[0:1])[0] > 1:
             # dat += seg[1:]
@@ -251,6 +254,7 @@ if __name__ == '__main__':
     with open('status.json', 'r') as f:
         status = json.load(f)
         SYSTEM = status['SYSTEM']
+        SYSTEM['TIMESTAMP'] = int(time.time()*1000)
         MOTOR = status['MOTOR']
         SENSOR = status['SENSOR']
         LIGHT = status['LIGHT']

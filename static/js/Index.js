@@ -39,16 +39,21 @@ async function getSystemData(){
         const data = await response.json();
         if(data.CONNECTED === true){
             document.getElementById("ip-address").innerText = data.IP;
-            document.getElementById("delay").innerText = String(Date.now() - data.TIMESTAMP) + " ms";
+            if(document.getElementById("ScreenFrame").contentWindow.location.href.split('/')[3] == 'Stream'){
+                document.getElementById("delay").innerText = "Stream: " + String(Date.now() - data.TIMESTAMP) + " ms";
+            }
+            else{
+                document.getElementById("delay").innerText = "Stream: -- ms";
+            }
             document.getElementById("gear").innerText = data.GEAR;
             document.getElementById("voltage").innerText = data.VOLTAGE + " V";
             document.getElementById("distance").innerText = data.DISTANCE + " Cm";
         }
         else{
             document.getElementById("ip-address").innerText = "Chưa kết nối";
-            document.getElementById("delay").innerText = "-- ms";
+            document.getElementById("delay").innerText = "Stream: -- ms";
             document.getElementById("voltage").innerText = "--- V";
-            document.getElementById("distance").innerText = "--- Cm";
+            document.getElementById("distance").innerText = "--- cm";
             // document.getElementById("Traffic-Sign").style.filter = invert();
             // document.getElementById("Self-Driving-mode").style.filter = invert();
             // document.getElementById("Remote-Control-mode").style.filter = invert();
