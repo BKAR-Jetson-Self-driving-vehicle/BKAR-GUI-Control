@@ -110,8 +110,8 @@ document.getElementById("ControllerButton").onclick = function ControllerButtonC
     document.getElementById("ScreenFrame").src = "/Controller";
 }
 
-document.getElementById("SettingsButton").onclick = function SettingsButtonClicked(){
-    document.getElementById("ScreenFrame").src = "/Settings";
+document.getElementById("LogsButton").onclick = function LogsButtonClicked(){
+    document.getElementById("ScreenFrame").src = "/Logs";
 }
 
 document.getElementById("InforButton").onclick = function InforButtonClicked(){

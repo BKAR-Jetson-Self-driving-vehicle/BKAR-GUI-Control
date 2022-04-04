@@ -130,17 +130,19 @@ def dump_buffer(s):
 def gen():
     """Video streaming generator function."""
     # Set up socket
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.bind(('192.168.53.112', 8000))
-    dat = b''
-    dump_buffer(s)
+    cam = cv2.VideoCapture(0)
+    # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    # s.bind(('192.168.53.112', 8000))
+    # dat = b''
+    # dump_buffer(s)
     while True:
-        seg, addr = s.recvfrom(MAX_DGRAM)
-        if struct.unpack("B", seg[0:1])[0] > 1:
-            dat += seg[1:]
-        else:
-            dat += seg[1:]
-            frame = cv2.imdecode(np.fromstring(dat, dtype=np.uint8), 1)
+        ret, frame = cam.read()
+        # seg, addr = s.recvfrom(MAX_DGRAM)
+        # if struct.unpack("B", seg[0:1])[0] > 1:
+            # dat += seg[1:]
+        # else:
+            # dat += seg[1:]
+            # frame = cv2.imdecode(np.fromstring(dat, dtype=np.uint8), 1)
         encode_return_code, image_buffer = cv2.imencode('.jpg', frame)
         io_buf = io.BytesIO(image_buffer)
         yield (b'--frame\r\n'
@@ -163,9 +165,9 @@ def configControl():
 
 
 # =========================================
-@app.route('/Settings')
+@app.route('/Logs')
 def Settings():
-    return 'Settings'
+    return 'Logs'
 
 
 # =========================================
